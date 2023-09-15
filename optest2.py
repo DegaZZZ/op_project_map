@@ -6,8 +6,8 @@ import plotly.express as px
 import geopandas as gpd
 
 # Load GeoJSON data
-data = gpd.read_file(r'C:\Users\degax\Documents\opheist\data\maptest3.geojson')
-data2 = gpd.read_file(r'C:\Users\degax\Documents\opheist\data\finland-with-regions_.geojson')
+data = gpd.read_file(r'maptest3.geojson')
+data2 = gpd.read_file(r'finland-with-regions_.geojson')
 
 app = dash.Dash(__name__)
 
