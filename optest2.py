@@ -50,10 +50,16 @@ app.layout = html.Div(style={'height': '98vh', 'width': '100%', 'position': 'rel
 def update_graph(selected_value):
     if selected_value == 'maptest3':
         data_source = data
+        fig = px.choropleth_mapbox(data_source, geojson=data_source.geometry, locations=data_source.index,
+                               color=data_source.index,
+                               mapbox_style="carto-positron",
+                               center={"lat": 64.5, "lon": 26},
+                               zoom=4,
+                               hover_name=data_source.get('nimi', ''),
+                               hover_data=["pinta_ala", "posti_alue"])  # Adjust as needed
     else:  # 'finland-regions'
         data_source = data2
-
-    fig = px.choropleth_mapbox(data_source, geojson=data_source.geometry, locations=data_source.index,
+        fig = px.choropleth_mapbox(data_source, geojson=data_source.geometry, locations=data_source.index,
                                color=data_source.index,
                                mapbox_style="carto-positron",
                                center={"lat": 64.5, "lon": 26},
