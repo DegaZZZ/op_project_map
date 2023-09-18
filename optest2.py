@@ -39,7 +39,7 @@ app.layout = html.Div(style={'height': '98vh', 'width': '100%', 'position': 'rel
             options=[
                 {'label': 'Maptest3', 'value': 'maptest3'},
                 {'label': 'Finland with Regions', 'value': 'finland-regions'},
-                {'label': 'WHAT THE FUCK???', 'value': 'wtfmap1'}
+                {'label': 'wtf is this map???', 'value': 'wtfmap1'} # I sincerely have no fucking idea what this map is because Paavo has the worst documentation ever
             ],
             value='maptest3',  # default value
             style={'width': '250px'}
@@ -84,7 +84,7 @@ def update_graph(selected_value):
                                hover_name=data_source.get('nimi', ''))  # Adjust as needed
         
 
-        
+# I tried to remove white edges here but it doesnt work. God I wish I knew CSS better.     
     fig.update_layout(
         margin={"r":0,"t":0,"l":0,"b":0},
         showlegend=False,
@@ -96,7 +96,7 @@ def update_graph(selected_value):
             layers=[]
         )
     )
-
+# All eyes only on Finland <3
     fig.update_mapboxes(
         bounds_east=56.17,
         bounds_west=-1,
