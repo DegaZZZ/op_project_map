@@ -51,7 +51,7 @@ def update_graph(selected_value):
     if selected_value == 'maptest3':
         data_source = data
         fig = px.choropleth_mapbox(data_source, geojson=data_source.geometry, locations=data_source.index,
-                               color=data_source.index,
+                               color=data_source.kuntanro, color_continuous_scale='geyser',
                                mapbox_style="carto-positron",
                                center={"lat": 64.5, "lon": 26},
                                zoom=4,
@@ -60,7 +60,7 @@ def update_graph(selected_value):
     else:  # 'finland-regions'
         data_source = data2
         fig = px.choropleth_mapbox(data_source, geojson=data_source.geometry, locations=data_source.index,
-                               color=data_source.index,
+                               color=data_source.index, color_continuous_scale='geyser',
                                mapbox_style="carto-positron",
                                center={"lat": 64.5, "lon": 26},
                                zoom=4,
