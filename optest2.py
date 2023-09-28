@@ -39,7 +39,7 @@ app.layout = html.Div(style={'height': '98vh', 'width': '100%', 'position': 'rel
             options=[
                 {'label': 'Maptest3', 'value': 'maptest3'},
                 {'label': 'Finland with Regions', 'value': 'finland-regions'},
-                {'label': 'some other map with lots of regions and postcode and data and bluh bluh blu', 'value': 'wtfmap1'} # I sincerely have no fucking idea what this map is because Paavo has the worst documentation ever
+                {'label': 'guys I cant come up with a name', 'value': 'wtfmap1'} # I sincerely have no fucking idea what this map is because Paavo has the worst documentation ever
             ],
             value='maptest3',  # default value
             style={'width': '250px'}
