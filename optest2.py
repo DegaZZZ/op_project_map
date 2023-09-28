@@ -1,18 +1,26 @@
 import dash
 import os
 from dash.dependencies import Input, Output
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc, html
 import plotly.express as px
+import pandas as pd
 import geopandas as gpd
+from fastapi import FastAPI
+from fastapi.responses import JSONResponse
+from starlette.applications import Starlette
+from starlette.middleware.wsgi import WSGIMiddleware
 
 # Load GeoJSON data
 data = gpd.read_file(r'maptest3.geojson')
 data2 = gpd.read_file(r'finland-with-regions_.geojson')
 data3 = gpd.read_file(r'wtfmap1.geojson')
 
+# Load postal code data
 
-app = dash.Dash(__name__)
+posti_data = pd.read_csv(r'indices.csv')
+all_indices = posti_data['index'].to_list()
+
+app = dash.Dash(__name__, suppress_callback_exceptions=True)
 
 app.css.config.serve_locally = False
 
@@ -106,6 +114,28 @@ def update_graph(selected_value):
 
     return fig
 
+api_app = FastAPI()
+
+@api_app.get("/message")
+def read_message():
+    return {"message": "Welcome to the API!"}
+
+# api call with a parameter
+@api_app.get("/posti_convert/{posti}", response_model=dict)
+def find_region(posti: str):
+    if int(posti) in all_indices:
+        region = posti_data[posti_data['index'] == int(posti)]['Region'].values[0]
+        response_data = {"region": region}
+        return JSONResponse(content=response_data)
+    else:
+        response_data = {"region": "Region Not Found"}
+        return JSONResponse(content=response_data, status_code=404)
+
+starlette_app = Starlette()
+starlette_app.mount("/api", api_app)
+dash_asgi_app = WSGIMiddleware(app.server)
+starlette_app.mount("/", dash_asgi_app)
+
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 8050))
-    app.run_server(debug=True, host='0.0.0.0', port=port)
+    import uvicorn
+    uvicorn.run(starlette_app, host='0.0.0.0', port=int(os.environ.get("PORT", 8050)))

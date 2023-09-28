@@ -3,3 +3,6 @@ dash-core-components==2.0.0
 dash-html-components==2.0.0
 plotly==5.13.0
 geopandas==0.13.2
+pandas==1.5.2
+fastapi==0.88.0
+starlette==0.22.0
