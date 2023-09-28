@@ -1,1 +1,1 @@
-web: python optest2.py
+web: uvicorn your_app_name:starlette_app --host=0.0.0.0 --port=$PORT
