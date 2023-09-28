@@ -6,3 +6,4 @@ geopandas==0.13.2
 pandas==1.5.2
 fastapi==0.88.0
 starlette==0.22.0
+uvicorn==0.20.0
